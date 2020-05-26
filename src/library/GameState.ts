@@ -392,8 +392,11 @@ export class GameState {
       const now = tasks.shift().clone()
       s.innerText = `${tasks.length}`
 
-      if(iS%200 == 0)
+      if(iS%123 == 0)
         await delay()
+
+      // if(iS > 10000)
+      //   return null
 
       for (let a = 0; a < now.size; a++) {
         for (let b = 0; b < now.size; b++) {
@@ -410,7 +413,7 @@ export class GameState {
                   stepNow.move(a, b)
 
                   if (!stepNow.win) {
-                    tasks.push(stepNow)
+                    tasks.unshift(stepNow)
                     s.innerText = `${tasks.length}`
                   }
                   else {
