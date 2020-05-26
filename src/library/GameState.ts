@@ -4,6 +4,7 @@ import { delay } from "./delay";
 
 const s = document.getElementById('s')
 const w = document.getElementById('w')
+const i = document.getElementById('i')
 
 export type TColor = [number, number, number]
 export type THandler = () => void
@@ -120,18 +121,13 @@ export class GameState {
       this.balls.push(ball)
     }
 
+
     this.startState = [...this.balls]
     this.reduceHandelrs = this.reduceHandelrs.bind(this)
   }
 
   getHashBalls(balls: Ball[]) {
-    const nowBalls = [...balls]
-    const rows: Array<Ball[]> = []
-
-    while(nowBalls.length)
-      rows.push(nowBalls.splice(0, lineSize))
-      
-    return rows.map((e, i) =>  [i,...e.map(e => e.colorIndex).filter(e => e !== -1)].join(';'))
+    return balls.map(e => (e.colorIndex + 1).toString(16)).join()
   }
 
   reduceHandelrs() {
@@ -140,12 +136,61 @@ export class GameState {
   }
 
   appendLine() {
-    const {balls} = this
-    
+    const { balls } = this
+
     for (let i = 0; i < lineSize; i++)
       this.balls.push(Ball.free(this, balls.length + i))
 
     this.reduceHandelrs()
+  }
+
+  getMaxOnly(ball: Ball) {
+    const { rows } = this
+
+    const rowsCalls = rows.map(row => {
+      const { balls } = row
+      const ballsFilter = balls
+        .filter(e=> e.colorIndex !== -1)
+
+      const haveOther = !!ballsFilter.find(e => e.colorIndex !== ball.colorIndex)
+
+    const {length} = ballsFilter.filter(e => e.colorIndex == ball.colorIndex)
+      
+      return { ...row, length, haveOther }
+    }).filter(e => !e.haveOther)
+
+    rowsCalls.sort((a, b) => b.length - a.length)
+
+    return rowsCalls[0]
+  }
+
+  needMove(rowA: number, rowB: number = -1) {
+    const row = this.getRow(rowA)
+    const topRow = this.getTop(rowA)
+    const only = this.getMaxOnly(topRow)
+
+    if (only && only.index != rowB)
+      return false
+
+    const rowBClear = (rowB !== -1 ? this.getRow(rowB) : row)
+      .filter(e => e.colorIndex !== -1)
+
+    let size = 0
+
+    for (let i = 0; i < lineSize; i++) {
+      if (row[i].free)
+        continue
+
+      if (row[i].colorIndex == topRow.colorIndex)
+        size++
+      else
+        return true
+
+      if (size >= 3)
+        return false
+    }
+
+    return rowBClear.length && true
   }
 
   canMove(rowA: number, rowB: number) {
@@ -181,6 +226,8 @@ export class GameState {
 
   setSelect(rowIndex: number = -1) {
     this.select = rowIndex
+    if (rowIndex !== -1)
+      console.log(this.needMove(rowIndex))
     this.reduceHandelrs()
   }
 
@@ -201,11 +248,8 @@ export class GameState {
 
     const hash = this.getHashBalls(step)
 
-    if(this.stepsHash.indexOf(hash[rowA]) == -1)
-      this.stepsHash.push(hash[rowA])
-
-    if(this.stepsHash.indexOf(hash[rowA]) == -1)
-      this.stepsHash.push(hash[rowB])
+    if (this.stepsHash.indexOf(hash) == -1)
+      this.stepsHash.push(hash)
 
     this.select = -1
 
@@ -317,10 +361,8 @@ export class GameState {
 
   hasStep(balls: Ball[], a: number, b: number) {
     const hashBalls = this.getHashBalls(balls)
-    const hashA = hashBalls[a]
-    const hashB = hashBalls[b]
 
-    if(this.stepsHash.indexOf(hashA) !== -1 && this.stepsHash.indexOf(hashB) !== -1)
+    if (this.stepsHash.indexOf(hashBalls) !== -1)
       return true
 
     return false
@@ -341,14 +383,17 @@ export class GameState {
 
   async calculate(state = this) {
     const tasks: GameState[] = [state]
-    const wins: GameState[] = []
+    let iS = 0
 
     s.innerText = `${tasks.length}`
+    i.innerText = `${iS}`
 
     while (tasks.length) {
       const now = tasks.shift().clone()
       s.innerText = `${tasks.length}`
-      await delay()
+
+      if(iS%200 == 0)
+        await delay()
 
       for (let a = 0; a < now.size; a++) {
         for (let b = 0; b < now.size; b++) {
@@ -356,24 +401,29 @@ export class GameState {
             const stepNow = now.clone()
 
             if (stepNow.canMove(a, b)) {
-              const preState = stepNow.fakeMove(a, b)
+              if (stepNow.needMove(a, b)) {
+                const preState = stepNow.fakeMove(a, b)
 
-              if (!stepNow.hasStep(preState, a, b)) {
+                if (!stepNow.hasStep(preState, a, b)) {
 
-                stepNow.move(a, b)
+                  i.innerText = `${++iS}`
+                  stepNow.move(a, b)
 
-                if (!stepNow.win) {
-                  tasks.push(stepNow)
-                  s.innerText = `${tasks.length}`
-                }
-                else {
-                  return stepNow
+                  if (!stepNow.win) {
+                    tasks.push(stepNow)
+                    s.innerText = `${tasks.length}`
+                  }
+                  else {
+                    return stepNow
+                  }
                 }
               }
             }
           }
         }
       }
+
+      // tasks.sort(() => Math.random() > 0.5 ? 1 : -1)
     }
 
     return null
