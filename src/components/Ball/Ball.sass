@@ -1,0 +1,24 @@
+@keyframes ball-spawn 
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+  
+.ball-component
+  margin: 3px
+  padding: 0
+
+  width: 24px
+  height: 24px
+
+  border-radius: 100%
+
+  animation: ball-spawn  0.6s
+
+  transition: 0.3s
+
+  transform: scale(1.2) translateY(0px)
+
+  &.up
+    transform: scale(1.4) translateY(-30px)
