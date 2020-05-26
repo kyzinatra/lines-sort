@@ -13,7 +13,7 @@ const mode = env.NODE_ENV = devMode ?
   'development' : 'production'
 
 const entry: Configuration['entry'] =
-  { main: "./src/index.tsx" }
+  { main: "./index.tsx" }
 
 const output: Configuration['output'] = {
   filename: '[name].js',

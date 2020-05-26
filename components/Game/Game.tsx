@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 
 import "./Game.sass";
-import { GameState } from "../../library/GameState";
-import { LinesMapComponent } from "../LinesMap/LinesMap";
+
+import { GameState } from "library/GameState";
+import { LinesMapComponent } from "components/LinesMap";
 
 export interface IGameComponentProps {
   state: GameState

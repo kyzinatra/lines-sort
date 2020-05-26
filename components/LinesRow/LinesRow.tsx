@@ -1,8 +1,9 @@
 import React from "react";
 
 import "./LinesRow.sass";
-import { GameState, IRow } from "../../library/GameState";
-import { LineComponent } from "../Line/Line";
+
+import { GameState, IRow } from "library/GameState";
+import { LineComponent } from "components/Line";
 
 export interface ILinesRowComponentProps {
   state: GameState

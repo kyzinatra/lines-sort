@@ -18,5 +18,8 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.42.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "components": "file:components",
+    "library": "file:library"
+  }
 }

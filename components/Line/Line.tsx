@@ -1,8 +1,9 @@
 import React from "react";
 
 import "./Line.sass";
-import { GameState, IRow } from "../../library/GameState";
-import { BallComponent } from "../Ball/Ball";
+
+import { GameState, IRow } from "library/GameState";
+import { BallComponent } from "components/Ball";
 
 export interface ILineComponentProps {
   state: GameState

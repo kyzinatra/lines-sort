@@ -1,8 +1,9 @@
 import React from "react";
 
 import "./LinesMap.sass";
-import { GameState } from "../../library/GameState";
-import { LinesRowComponent } from "../LinesRow/LinesRow";
+
+import { GameState } from "library/GameState";
+import { LinesRowComponent } from "components/LinesRow";
 
 export interface ILinesMapComponentProps {
   state: GameState
