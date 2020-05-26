@@ -140,8 +140,10 @@ export class GameState {
   }
 
   appendLine() {
+    const {balls} = this
+    
     for (let i = 0; i < lineSize; i++)
-      this.balls.push(null)
+      this.balls.push(Ball.free(this, balls.length + i))
 
     this.reduceHandelrs()
   }

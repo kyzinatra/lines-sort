@@ -14,24 +14,6 @@ const map = new Uint8Array(
 const dop = 2
 
 const root = document.getElementById('root')
-const gameState = map.length ? new GameState(map, dop) : GameState.generate(3, dop)
-
-async function showWinState() {
-  const wins = await gameState.calculate()
-
-  if(!wins)
-    return console.log('Я обосрался!')
-
-
-  const {moves} = wins
-
-  for (let [a, b] of moves) {
-    await delay(300)
-    gameState.setSelect(a)
-    await delay(500)
-    gameState.move(a, b)
-  }
-}
+const gameState = map.length ? new GameState(map, dop) : GameState.generate(12, dop)
 
 render(<GameComponent state={gameState} />, root)
-showWinState().catch(console.error)

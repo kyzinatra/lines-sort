@@ -16,11 +16,15 @@ export const GameComponent = ({ state }: IGameComponentProps) => {
       switch(key) {
         case 'Backspace': 
             state.back()
-          break;
+          break
 
         case 'Escape':
             state.restart()
-          break;
+          break
+
+        case '+':
+            state.appendLine()
+          break
       }
     }
 
