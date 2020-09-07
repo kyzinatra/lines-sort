@@ -18,6 +18,11 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.42.0"
   },
+  "scripts": {
+    "build": "webpack --prod",
+    "start": "htt-server -c-1",
+    "start-dev": "webpack-dev-server"
+  },
   "dependencies": {
     "components": "file:components",
     "library": "file:library"
