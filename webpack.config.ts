@@ -64,7 +64,6 @@ const externals: Configuration['externals'] = {
   "react-dom": "ReactDOM"
 }
 const devServer: Configuration['devServer'] = {
-  host: '192.168.1.3',
   port: 8080
 }
 
