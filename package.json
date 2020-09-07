@@ -20,8 +20,9 @@
   },
   "scripts": {
     "build": "webpack --prod",
-    "start": "htt-server -c-1",
-    "start-dev": "webpack-dev-server"
+    "start": "http-server -c-1",
+    "start-dev": "webpack-dev-server",
+    "build-dev": "webpack"
   },
   "dependencies": {
     "components": "file:components",
