@@ -3,18 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
-    "@types/node": "^12.6.8",
+    "@types/node": "^14.6.4",
     "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.9",
     "@types/webpack": "^4.4.19",
     "@types/webpack-dev-server": "^3.1.7",
-    "css-loader": "^1.0.1",
-    "file-loader": "^1.1.11",
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
     "node-sass": "^4.13.1",
-    "sass-loader": "^7.3.1",
-    "style-loader": "^0.21.0",
-    "ts-loader": "^4.5.0",
-    "typescript": "^2.9.2",
+    "sass-loader": "^10.0.2",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.42.0"
   },
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "components": "file:components",
-    "library": "file:library"
+    "library": "file:library",
+    "sass": "^1.26.10"
   }
 }
