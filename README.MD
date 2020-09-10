@@ -14,6 +14,11 @@
 > 1. [WebPack-dev-Server](https://www.npmjs.com/package/webpack-dev-server)
 >
 
+# Online Demo
+
+>
+> Игра для пробы доступна по [этой ссылке](./demo)
+>
 
 # Команды
 
