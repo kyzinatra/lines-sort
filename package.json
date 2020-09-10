@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "components": "file:components",
-    "library": "file:library",
-    "sass": "^1.26.10"
+    "library": "file:library"
   }
 }
