@@ -4,7 +4,6 @@
     "target": "ESNext",
     "esModuleInterop": true,
     "jsx": "react",
-    "experimentalDecorators": true,
-    "sourceMap": true
+    "experimentalDecorators": true
   }
 }
