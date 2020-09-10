@@ -83,4 +83,4 @@ async function main() {
 }
 
 render(<GameComponent state={gameState} />, root)
-main().catch(console.error)
+// main().catch(console.error)
