@@ -52,8 +52,16 @@ const modules: Configuration['module'] = {
       test: /\.scss|\.sass$/,
       use: [
         'style-loader',
-        "css-loader?minimize&{discardComments:{removeAll:true}}",
-        "sass-loader?outputStyle=compressed"
+        "css-loader",
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true,
+            sassOptions: {
+              outputStyle: 'compressed',
+            },
+          },
+        }
       ]
     }
   ]
