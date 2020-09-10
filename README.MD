@@ -13,12 +13,12 @@
 > 1. [WebPack-cli](https://www.npmjs.com/package/webpack-cli)
 > 1. [WebPack-dev-Server](https://www.npmjs.com/package/webpack-dev-server)
 >
-
+<!-- 
 # Online Demo
 
 >
-> Игра для пробы доступна по [этой ссылке](./demo/index.html)
->
+> Игра для пробы доступна по [этой ссылке](./demo)
+> -->
 
 # Команды
 
